@@ -48,5 +48,4 @@ public class AccountEntity extends BaseEntity {
 
 	@Column(nullable = false)
 	private Integer age;
-
 }

@@ -4,9 +4,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -27,7 +25,8 @@ public abstract class BaseEntity implements Serializable {
 	@Column(nullable = false, updatable = false)
 	protected LocalDateTime createdAt;
 
-	@LastModifiedDate @Column @Builder.Default protected LocalDateTime updatedAt = LocalDateTime.now();
+	@LastModifiedDate @Column @Builder.Default
+	protected LocalDateTime updatedAt = LocalDateTime.now();
 
 	/**
 	 * if have createdUser and updatedUser column // @CreatedBy // @Column(nullable = false, updatable
