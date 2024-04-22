@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "accounts")
-public class Account extends BaseEntity {
+public class AccountEntity extends BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "account_id")
@@ -35,7 +35,7 @@ public class Account extends BaseEntity {
 	@Column(nullable = false)
 	private String password;
 
-	@Column(nullable = false)
+	@Column(name = "role", nullable = false)
 	@Enumerated(EnumType.STRING)
 	private Role role;
 
@@ -48,4 +48,5 @@ public class Account extends BaseEntity {
 
 	@Column(nullable = false)
 	private Integer age;
+
 }

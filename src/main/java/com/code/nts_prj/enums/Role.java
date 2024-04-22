@@ -1,2 +1,6 @@
-package com.code.nts_prj.enums;public enum Role {
+package com.code.nts_prj.enums;
+
+public enum Role {
+	admin,
+	user
 }
