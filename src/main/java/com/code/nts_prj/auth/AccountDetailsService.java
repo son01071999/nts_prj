@@ -2,7 +2,7 @@ package com.code.nts_prj.auth;
 
 import com.code.nts_prj.account.entity.AccountEntity;
 import com.code.nts_prj.account.exceptions.runtime.UserNameNotFoundException;
-import com.code.nts_prj.repository.AccountRepo;
+import com.code.nts_prj.account.repository.AccountRepo;
 import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

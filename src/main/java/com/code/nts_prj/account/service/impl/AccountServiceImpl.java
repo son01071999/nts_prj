@@ -12,7 +12,7 @@ import com.code.nts_prj.account.request_response.response.RegisterAccountRespons
 import com.code.nts_prj.account.service.AccountService;
 import com.code.nts_prj.auth.JwtUtil;
 import com.code.nts_prj.auth.exceptions.InvalidLoginRequestException;
-import com.code.nts_prj.repository.AccountRepo;
+import com.code.nts_prj.account.repository.AccountRepo;
 import com.code.nts_prj.validation.RequestObjectValidation;
 import java.util.List;
 import lombok.AllArgsConstructor;
