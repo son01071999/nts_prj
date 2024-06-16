@@ -1,6 +1,7 @@
-package com.code.nts_prj.entity;
+package com.code.nts_prj.account.entity;
 
-import com.code.nts_prj.enums.Role;
+import com.code.nts_prj.account.enums.Role;
+import com.code.nts_prj.entity.BaseEntity;
 import com.code.nts_prj.validation.PhoneNumber;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -18,7 +19,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
-@Builder
+@Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "accounts")
@@ -35,7 +36,7 @@ public class AccountEntity extends BaseEntity {
 	@Column(nullable = false)
 	private String password;
 
-	@Column(name = "role", nullable = false)
+	@Column(nullable = false, columnDefinition = "varchar")
 	@Enumerated(EnumType.STRING)
 	private Role role;
 

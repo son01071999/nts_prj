@@ -1,6 +1,7 @@
-package com.code.nts_prj.request_response.request;
+package com.code.nts_prj.account.request_response.request;
 
 import com.code.nts_prj.validation.PhoneNumber;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -9,10 +10,16 @@ import lombok.Getter;
 @Builder
 @Getter
 public class RegisterAccountRequest {
+	@JsonProperty("user_name")
 	private String userName;
+
 	private String password;
 	private String role;
-	@PhoneNumber private String phoneNumber;
+
+	@JsonProperty("phone_number")
+	@PhoneNumber
+	private String phoneNumber;
+
 	private String name;
 	private Integer age;
 }

@@ -13,4 +13,6 @@ public class RequestObjectValidation {
 		}
 		return true; // if all fields are not null, return true
 	}
+
+	private RequestObjectValidation() {}
 }

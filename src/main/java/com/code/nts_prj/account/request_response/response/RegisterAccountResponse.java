@@ -1,5 +1,6 @@
-package com.code.nts_prj.request_response.response;
+package com.code.nts_prj.account.request_response.response;
 
+import com.code.nts_prj.response.BaseResponse;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;

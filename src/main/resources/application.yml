@@ -17,3 +17,7 @@ spring:
         dialect: org.hibernate.dialect.MySQL8Dialect
         order_updates: true
         order_insert: true
+  security:
+    jwt:
+      secret-key: sontu010799
+      expiration-time: 3600000 #1h
