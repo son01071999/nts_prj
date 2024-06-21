@@ -5,7 +5,7 @@ docker-compose up -d
 sleep 10
 
 echo "Waiting for DB to ready..."
-# shellcheck disable=SC1083
+# shellcheck
 while [ "$(docker inspect -f {{.State.Health.Status}} my-db-mysql)" != "healthy" ]; do
   sleep 1
 done
