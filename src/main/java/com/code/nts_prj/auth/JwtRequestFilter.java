@@ -23,12 +23,15 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 	private final AccountDetailsService accountDetailsService;
 
 	private final AuthenticationEntryPoint authenticationEntryPoint;
+	private final JwtUtil jwtUtil;
 
 	public JwtRequestFilter(
 			AccountDetailsService accountDetailsService,
-			AuthenticationEntryPoint authenticationEntryPoint) {
+			AuthenticationEntryPoint authenticationEntryPoint,
+			JwtUtil jwtUtil) {
 		this.accountDetailsService = accountDetailsService;
 		this.authenticationEntryPoint = authenticationEntryPoint;
+		this.jwtUtil = jwtUtil;
 	}
 
 	@Override
@@ -37,11 +40,11 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 			@NotNull HttpServletResponse response,
 			@NotNull FilterChain filterChain)
 			throws ServletException, IOException {
-		final String token = request.getHeader(JwtUtil.AUTHORIZATION);
-		if (StringUtils.hasText(token) && token.startsWith(JwtUtil.PREFIX)) {
-			String jwt = JwtUtil.parseToken(token);
+		final String token = request.getHeader(this.jwtUtil.AUTHORIZATION);
+		if (StringUtils.hasText(token) && token.startsWith(this.jwtUtil.PREFIX)) {
+			String jwt = this.jwtUtil.parseToken(token);
 			try {
-				String userName = JwtUtil.extractUserName(jwt);
+				String userName = this.jwtUtil.extractUserName(jwt);
 				if (StringUtils.hasText(userName)
 						&& Objects.isNull(SecurityContextHolder.getContext().getAuthentication())) {
 					UserDetails userDetails = accountDetailsService.loadUserByUsername(userName);

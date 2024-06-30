@@ -5,6 +5,7 @@ import com.code.nts_prj.account.entity.AccountEntity;
 import com.code.nts_prj.account.exceptions.runtime.InvalidRequestException;
 import com.code.nts_prj.account.exceptions.runtime.UserNameExistsException;
 import com.code.nts_prj.account.exceptions.runtime.UserNameNotFoundException;
+import com.code.nts_prj.account.repository.AccountRepo;
 import com.code.nts_prj.account.request_response.request.LoginRequest;
 import com.code.nts_prj.account.request_response.request.RegisterAccountRequest;
 import com.code.nts_prj.account.request_response.response.LoginResponse;
@@ -12,7 +13,6 @@ import com.code.nts_prj.account.request_response.response.RegisterAccountRespons
 import com.code.nts_prj.account.service.AccountService;
 import com.code.nts_prj.auth.JwtUtil;
 import com.code.nts_prj.auth.exceptions.InvalidLoginRequestException;
-import com.code.nts_prj.account.repository.AccountRepo;
 import com.code.nts_prj.validation.RequestObjectValidation;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -28,6 +28,7 @@ import org.springframework.util.StringUtils;
 public class AccountServiceImpl implements AccountService {
 	private final AccountRepo accountRepo;
 	private final AuthenticationManager authenticationManager;
+	private final JwtUtil jwtUtil;
 	private final String SUCCESS = "SUCCESS";
 
 	@Override
@@ -76,7 +77,7 @@ public class AccountServiceImpl implements AccountService {
 			throw new InvalidRequestException();
 		}
 		AccountEntity account =
-				accountRepo
+				this.accountRepo
 						.findByUserName(request.getUserName())
 						.orElseThrow(UserNameNotFoundException::new);
 
@@ -89,7 +90,7 @@ public class AccountServiceImpl implements AccountService {
 		if (!isAuthenticated(authentication)) {
 			throw new InvalidLoginRequestException();
 		}
-		String token = JwtUtil.generateToken(account);
+		String token = jwtUtil.generateToken(account);
 		return new LoginResponse(200, SUCCESS, token);
 	}
 
