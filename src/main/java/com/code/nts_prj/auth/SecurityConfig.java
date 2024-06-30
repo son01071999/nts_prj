@@ -25,11 +25,15 @@ public class SecurityConfig {
 
 	private final AuthenticationEntryPoint authenticationEntryPoint;
 
+	private final JwtUtil jwtUtil;
+
 	public SecurityConfig(
 			final AccountDetailsService accountDetailsService,
-			final AuthenticationEntryPoint authenticationEntryPoint) {
+			final AuthenticationEntryPoint authenticationEntryPoint,
+			JwtUtil jwtUtil) {
 		this.accountDetailsService = accountDetailsService;
 		this.authenticationEntryPoint = authenticationEntryPoint;
+		this.jwtUtil = jwtUtil;
 	}
 
 	@Bean
@@ -39,17 +43,17 @@ public class SecurityConfig {
 		httpSecurity
 				.csrf(AbstractHttpConfigurer::disable)
 				.addFilterBefore(
-						new JwtRequestFilter(accountDetailsService, authenticationEntryPoint),
+						new JwtRequestFilter(accountDetailsService, authenticationEntryPoint, jwtUtil),
 						BasicAuthenticationFilter.class)
 				.authorizeHttpRequests(
 						authorizeHttpRequests ->
 								authorizeHttpRequests
 										.requestMatchers("/account/user/**")
 										.permitAll()
-										.requestMatchers("/admin/**")
+										.requestMatchers("/account/admin/**")
 										.hasRole("ADMIN")
 										.anyRequest()
-										.denyAll())
+										.authenticated())
 				.httpBasic(Customizer.withDefaults())
 				.sessionManagement(
 						httpSecuritySessionManagementConfigurer ->

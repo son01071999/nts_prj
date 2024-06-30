@@ -7,7 +7,7 @@ import com.code.nts_prj.account.request_response.response.LoginResponse;
 import com.code.nts_prj.account.request_response.response.RegisterAccountResponse;
 import com.code.nts_prj.account.service.AccountService;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,8 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/account")
+@AllArgsConstructor
 public class AccountController {
-	@Autowired private AccountService accountService;
+	private final AccountService accountService;
 
 	@PostMapping("/user/register-account")
 	public ResponseEntity<RegisterAccountResponse> registerAccount(
@@ -31,8 +32,13 @@ public class AccountController {
 		return ResponseEntity.ok().body(accountService.login(request));
 	}
 
-	@GetMapping("/admin/getAll")
+	@GetMapping("/admin/get-all")
 	public ResponseEntity<List<AccountEntity>> getAll() {
 		return ResponseEntity.ok().body(accountService.getAll());
+	}
+
+	@GetMapping("/admin/testJwt")
+	public ResponseEntity<String> test() {
+		return ResponseEntity.ok().body("Success");
 	}
 }

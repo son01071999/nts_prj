@@ -24,7 +24,7 @@ public class AccountDetailsService implements UserDetailsService {
 		AccountEntity account =
 				accountRepo.findByUserName(username).orElseThrow(UserNameNotFoundException::new);
 		List<GrantedAuthority> authorityList =
-				List.of(new SimpleGrantedAuthority(account.getRole().name()));
+				List.of(new SimpleGrantedAuthority("ROLE_" + account.getRole().name()));
 
 		return new User(account.getUserName(), account.getPassword(), authorityList);
 	}
