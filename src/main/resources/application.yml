@@ -14,7 +14,6 @@ spring:
       ddl-auto: validate
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQL8Dialect
         order_updates: true
         order_insert: true
   security:
@@ -25,4 +24,7 @@ spring:
     redis:
       host: localhost
       port: 6379
-#      password: sontu010799
+
+#Api key
+api:
+  key: 0987654321qazxswedc

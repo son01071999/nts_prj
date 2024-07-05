@@ -17,4 +17,7 @@ public interface ErrorConst {
 
 	long USERNAME_NOT_FOUND_ERROR_CODE = 100005L;
 	String USERNAME_NOT_FOUND_ERROR_MESSAGE = "Username not found";
+
+	String NOT_FOUND_API_KEY_ERROR_MESSAGE = "API key is not found";
+	String INVALID_API_KEY_ERROR_MESSAGE = "API key is invalid";
 }
