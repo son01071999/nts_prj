@@ -60,7 +60,7 @@ public class CommonExceptionHandler {
 	@ExceptionHandler(InvalidLoginRequestException.class)
 	public ResponseEntity<InvalidLoginRequestExceptionResponse> handleUserNameExistsExceptionResponse(
 			final InvalidLoginRequestException exception) {
-		log.error("RegisterRequestException is occurred: {}.", exception.getMessage());
+		log.error("InvalidLoginRequestException is occurred: {}.", exception.getMessage());
 		return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
 				.body(new InvalidLoginRequestExceptionResponse());
 	}
@@ -68,7 +68,7 @@ public class CommonExceptionHandler {
 	@ExceptionHandler(UserNameNotFoundException.class)
 	public ResponseEntity<UserNameNotFoundExceptionResponse> handleUserNameExistsExceptionResponse(
 			final UserNameNotFoundException exception) {
-		log.error("RegisterRequestException is occurred: {}.", exception.getMessage());
+		log.error("UserNameNotFoundException is occurred: {}.", exception.getMessage());
 		return ResponseEntity.status(HttpStatus.NOT_FOUND)
 				.body(new UserNameNotFoundExceptionResponse());
 	}

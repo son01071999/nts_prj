@@ -21,6 +21,7 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 @EnableWebSecurity
 @EnableMethodSecurity(securedEnabled = true, jsr250Enabled = true)
 public class SecurityConfig {
+	private final ApiKeyFilter apiKeyFilter;
 	private final AccountDetailsService accountDetailsService;
 
 	private final AuthenticationEntryPoint authenticationEntryPoint;
@@ -28,9 +29,11 @@ public class SecurityConfig {
 	private final JwtUtil jwtUtil;
 
 	public SecurityConfig(
+			ApiKeyFilter apiKeyFilter,
 			final AccountDetailsService accountDetailsService,
 			final AuthenticationEntryPoint authenticationEntryPoint,
 			JwtUtil jwtUtil) {
+		this.apiKeyFilter = apiKeyFilter;
 		this.accountDetailsService = accountDetailsService;
 		this.authenticationEntryPoint = authenticationEntryPoint;
 		this.jwtUtil = jwtUtil;
@@ -45,6 +48,7 @@ public class SecurityConfig {
 				.addFilterBefore(
 						new JwtRequestFilter(accountDetailsService, authenticationEntryPoint, jwtUtil),
 						BasicAuthenticationFilter.class)
+				.addFilterBefore(apiKeyFilter, BasicAuthenticationFilter.class)
 				.authorizeHttpRequests(
 						authorizeHttpRequests ->
 								authorizeHttpRequests
